@@ -43,4 +43,4 @@ def smallestStringWithSwaps(s: str, pairs: List[List[int]]) -> str:
     return "".join(answer)
 
 
-print(smallestStringWithSwaps("dcab",[[0,3],[1,2],[0,2]]))
+print(smallestStringWithSwaps("cab",[[0,3],[1,2],[0,2]]))
