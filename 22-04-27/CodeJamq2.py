@@ -1,3 +1,6 @@
+# https://codingcompetitions.withgoogle.com/codejam/round/000000000087711b/0000000000accfdb
+# A great DP practice, key observation is that each customer has to end with min or max pressure product
+# Run-time complexity is O(N), space complexity is O(N)
 def main():
     cases = int(input())
     for i in range(cases):
