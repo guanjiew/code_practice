@@ -1,4 +1,27 @@
-from queue import PriorityQueue
+import heapq
+
+
+# Dijkstra algorithm divides all the nodes into explored and unexplored.
+# For nodes in explored, the value found is the shortest distance from source
+# It will explore the shortest unexplored node and update the distance if a shorter one is found
+# It works for single source problem with non-negative edges
+# Pres-duo Code
+# def Dijkstra(source, destination):
+#     for each vertex v
+#         dist [v] = inf
+#         prev [v] = None
+#     dist[source] = 0
+#     explored = []
+#     set unexplored as priority queue
+#     while destination not in explored:
+#         v <- unexplored.pop()
+#         set v to be explored
+#         for all edges in (v, w):
+#             if dist[v] + cost(v, w) < dist(w):
+#                 dist(w) = dist(v) + cost(v, w)
+#                 prev[w] = v
+#     return dist[destination]
+#
 
 
 class Graph:
@@ -7,33 +30,29 @@ class Graph:
         self.v = [i for i in range(num_vertices)]
         self.edges = [[-1 for i in range(num_vertices)] for j in range(num_vertices)]
         self.visited = []
+        self.unexplored = []
+        self.dist = [float('inf') for i in range(self.num_vertices)]
 
     def add_edge(self, u, v, weight):
         self.edges[u][v] = weight
         self.edges[v][u] = weight
 
     def dijkstra(self, source):
-        # We will use priority queue to store all the visited nodes with dist as the priority
-        pq = PriorityQueue()
-        pq.put((0, source))
-        # Initialize the distance to be infinite for all nodes except for source
-        dist = [float('inf') for i in range(self.num_vertices)]
-        dist[source] = 0
+        heapq.heappush(self.unexplored, (0, source))
+        self.dist[source] = 0
+        self.visited.append(source)
 
-        while not pq.empty():
-            (_, vertex) = pq.get()
-            if vertex in self.visited:
-                continue
+        while self.unexplored:
+            (_, vertex) = heapq.heappop(self.unexplored)
             self.visited.append(vertex)
-
             for neighbor in self.v:
                 if neighbor not in self.visited and self.edges[vertex][neighbor] != -1:
                     distance = self.edges[vertex][neighbor]
-                    if dist[vertex] + distance < dist[neighbor]:
-                        new_cost = dist[vertex] + distance
-                        dist[neighbor] = new_cost
-                        pq.put((new_cost, neighbor))
-        return dist
+                    if self.dist[vertex] + distance < self.dist[neighbor]:
+                        new_cost = self.dist[vertex] + distance
+                        self.dist[neighbor] = new_cost
+                        heapq.heappush(self.unexplored, (new_cost, neighbor))
+        return self.dist
 
 
 # The run-time complexity is O(E + VlogV)
