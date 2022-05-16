@@ -1,4 +1,6 @@
 import heapq
+# A great visualization: https://www.youtube.com/watch?v=EFg3u_E6eHU
+# Into to heapq: https://realpython.com/python-heapq-module/
 
 
 # Dijkstra algorithm divides all the nodes into explored and unexplored.
