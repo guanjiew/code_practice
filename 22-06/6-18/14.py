@@ -2,7 +2,7 @@ import collections
 from typing import List
 Trie = lambda: collections.defaultdict(Trie)
 
-
+z
 def longestCommonPrefix(strs: List[str]) -> str:
     root = Trie()
     for s in strs:

@@ -30,9 +30,6 @@ class WordFilter:
         index = -1
         length = 0
 
-
-
-
 # Your WordFilter object will be instantiated and called as such:
 # obj = WordFilter(words)
 # param_1 = obj.f(prefix,suffix)
